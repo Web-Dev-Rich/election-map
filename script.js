@@ -167,6 +167,24 @@ janeDoe.electionResults[43] = 27;
 console.log(johnDoe.electionResults);
 console.log(janeDoe.electionResults);
 
+// Set the state results
+var setStateResults = function(state) {
+  theStates[state].winner = null;
+
+  if (johnDoe.electionResults[state] > janeDoe.electionResults[state]) {
+    theStates[state].winner = johnDoe;
+  } else if (johnDoe.electionResults[state] < janeDoe.electionResults[state]) {
+    theStates[state].winner = janeDoe;
+  }
+
+  var stateWinner = theStates[state].winner;
+  if (stateWinner !== null) {
+    theStates[state].rgbColor = stateWinner.partyColor;
+  } else {
+    theStates[state].rgbColor = [11, 32, 57];
+  }
+};
+
 // Sum up candidates votes
 johnDoe.sumVotes();
 janeDoe.sumVotes();
@@ -187,3 +205,11 @@ johnDoe.announce();
 janeDoe.announce();
 
 console.log("Election result: " + winner);
+
+var mainTbl = document.getElementById("countryResults");
+var row = mainTbl.children[0].children[0];
+row.children[0].innerText = johnDoe.name;
+row.children[1].innerText = johnDoe.totalVotes;
+row.children[2].innerText = janeDoe.name;
+row.children[3].innerText = janeDoe.totalVotes;
+row.children[5].innerText = winner;
