@@ -4,18 +4,18 @@ var winner;
 /*****************************************
  * POLITICIAN FACTORY FUNCTION
  * Purpose: to produce politician objects
- * Parameters: 3
+ * Parameters: 2
  * - Politician's name (String)
- * - Election results (Array)
- * - Total votes (Number) set to 0
+ * - Party colour (String)
  *****************************************/
-var makePolitician = function(polName, polElectionResults, polTotalVotes) {
+var makePolitician = function(polName, polPartyColor) {
   var politician = {}; // Object literal
   politician.name = polName;
-  politician.electionResults = polElectionResults;
-  politician.totalVotes = polTotalVotes;
+  politician.partyColor = polPartyColor;
+  politician.electionResults = [];
+  politician.totalVotes = 0;
 
-  // Console out to check properties set
+  // Method to console out properties
   politician.announce = function() {
     console.log(
       "Name: " +
@@ -23,11 +23,13 @@ var makePolitician = function(polName, polElectionResults, polTotalVotes) {
         ", Results: [" +
         this.electionResults +
         "], Votes: " +
-        this.totalVotes
+        this.totalVotes +
+        ", Colour: " +
+        this.partyColor
     );
   };
 
-  politician.announce();
+  // politician.announce();
 
   // Method to sum electionResults array to totalVotes property
   politician.sumVotes = function() {
@@ -40,8 +42,8 @@ var makePolitician = function(polName, polElectionResults, polTotalVotes) {
   return politician;
 }; // End factory function
 
-var johnDoe = makePolitician("John Doe", null, 0);
-var janeDoe = makePolitician("Jane Doe", null, 0);
+var johnDoe = makePolitician("John Doe", [132, 17, 11]);
+var janeDoe = makePolitician("Jane Doe", [245, 141, 136]);
 
 // Initial results
 johnDoe.electionResults = [
@@ -180,5 +182,8 @@ if (johnDoe.totalVotes == janeDoe.totalVotes) {
 } else {
   winner = "Jane Doe wins!";
 }
+
+johnDoe.announce();
+janeDoe.announce();
 
 console.log("Election result: " + winner);
