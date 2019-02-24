@@ -164,8 +164,8 @@ janeDoe.electionResults[4] = 38;
 johnDoe.electionResults[43] = 11;
 janeDoe.electionResults[43] = 27;
 
-console.log(johnDoe.electionResults);
-console.log(janeDoe.electionResults);
+//console.log(johnDoe.electionResults);
+//console.log(janeDoe.electionResults);
 
 // Set the state results
 var setStateResults = function(state) {
@@ -183,14 +183,48 @@ var setStateResults = function(state) {
   } else {
     theStates[state].rgbColor = [11, 32, 57];
   }
+
+  //Populate state info table
+  var stateTbl = document.getElementById("stateResults");
+  var thRow = stateTbl.children[0].children[0];
+  var tblBody = stateTbl.children[1];
+  var tblCand1 = tblBody.children[0];
+  var tblCand2 = tblBody.children[1];
+  var tblWinner = tblBody.children[2];
+
+  var stateName = thRow.children[0];
+  stateName.innerText = theStates[state].nameFull;
+
+  var stateAbbrev = thRow.children[1];
+  stateAbbrev.innerText = theStates[state].nameAbbrev;
+
+  var cand1Name = tblCand1.children[0];
+  cand1Name.innerText = johnDoe.name;
+
+  var cand1Result = tblCand1.children[1];
+  cand1Result.innerText = johnDoe.electionResults[state];
+
+  var cand2Name = tblCand2.children[0];
+  cand2Name.innerText = janeDoe.name;
+
+  var cand2Result = tblCand2.children[1];
+  cand2Result.innerText = janeDoe.electionResults[state];
+
+  var tblWinnerName = tblWinner.children[1];
+
+  if (theStates[state].winner === null) {
+    tblWinnerName.innerText = "DRAW";
+  } else {
+    tblWinnerName.innerText = theStates[state].winner.name;
+  }
 };
 
 // Sum up candidates votes
 johnDoe.sumVotes();
 janeDoe.sumVotes();
 
-console.log(johnDoe.totalVotes);
-console.log(janeDoe.totalVotes);
+//console.log(johnDoe.totalVotes);
+//console.log(janeDoe.totalVotes);
 
 // Declare the winner
 if (johnDoe.totalVotes == janeDoe.totalVotes) {
@@ -201,11 +235,12 @@ if (johnDoe.totalVotes == janeDoe.totalVotes) {
   winner = "Jane Doe wins!";
 }
 
-johnDoe.announce();
-janeDoe.announce();
+//johnDoe.announce();
+//janeDoe.announce();
 
-console.log("Election result: " + winner);
+//console.log("Election result: " + winner);
 
+// Populate main top table
 var mainTbl = document.getElementById("countryResults");
 var row = mainTbl.children[0].children[0];
 row.children[0].innerText = johnDoe.name;
